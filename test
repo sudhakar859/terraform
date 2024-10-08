@@ -1,1 +1,15 @@
-789hjhh
+# Define variables from the pipeline
+VM_NAME=$(vmName)
+DISK_NAME=$(diskName)
+RESOURCE_GROUP=$(resourceGroup)
+SUBSCRIPTION_ID=$(subscriptionId)
+NEW_SIZE_GB=$(newSizeGB)
+
+# Log the details
+echo "Resizing disk for VM: $VM_NAME, Disk: $DISK_NAME, Resource Group: $RESOURCE_GROUP, Subscription: $SUBSCRIPTION_ID"
+
+# Set the correct subscription
+az account set --subscription $SUBSCRIPTION_ID
+
+# Resize the disk
+az disk update --resource-group $RESOURCE_GROUP --name $DISK_NAME --size-gb $NEW_SIZE_GB
